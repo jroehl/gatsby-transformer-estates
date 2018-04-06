@@ -1,6 +1,6 @@
 {
   "name": "gatsby-transformer-estates",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "A gatsby transformer plugin to sanitize data coming from gatsby-transformer-estates plugin",
   "author": {
     "name": "Johann Roehl",
