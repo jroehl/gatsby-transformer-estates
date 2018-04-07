@@ -15,7 +15,6 @@ module.exports.onCreateNode = async (
 
   // We only care about specific content types.
   if (type !== 'is24Estates' && type !== 'flowfactEstates') return;
-  console.log('Transforming estate node');
 
   const estate = JSON.parse(await loadNodeContent(node));
 
