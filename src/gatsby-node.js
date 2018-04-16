@@ -9,7 +9,7 @@ const cfg = require('./config');
  */
 module.exports.onCreateNode = async (
   { node, boundActionCreators: { createNode, createParentChildLink }, loadNodeContent },
-  { fields = cfg.fields, maxDimensions = cfg.maxDimensions },
+  { fields = cfg.fields, maxDimensions = cfg.maxDimensions }
 ) => {
   const { type } = node && node.internal ? node.internal : {};
 
@@ -20,15 +20,17 @@ module.exports.onCreateNode = async (
 
   const sanitizedDetail = sanitizeDetails(estate, fields, maxDimensions);
 
+  const content = JSON.stringify(sanitizedDetail);
   const sanitizedNode = {
-    ...sanitizedDetail,
-    id: `${sanitizedDetail.id} >>> SANITIZED`,
+    id: `${sanitizedDetail.id}x`,
+    provider: type.replace('Estates', ''),
+    estate: content,
     children: [],
     parent: node.id,
     internal: {
       contentDigest: crypto
         .createHash('md5')
-        .update(JSON.stringify(sanitizedDetail))
+        .update(content)
         .digest('hex'),
       type: `${type}Sanitized`,
     },
